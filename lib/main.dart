@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       LineSeries<_ChartData, DateTime>(
                           dataSource:  _ListChartData,
                           xValueMapper: (_ChartData data, _) => data.timestamp,
-                          yValueMapper: (_ChartData data, _) => data.speed,
+                          yValueMapper: (_ChartData data, _) => data.speed / 10,
                           color: Colors.red,
                       )
                     ]
@@ -135,7 +135,7 @@ class _ChartData {
 
   factory _ChartData.fromRTDB(Map<String, dynamic> data) {
     return _ChartData(humidity: data["humidity"], outsideTemp: data['outsideTemp'],
-        speed: data['speed'] / 10, temperature: data['temperature'],
+        speed: data['speed'], temperature: data['temperature'],
         timestamp: DateTime.fromMillisecondsSinceEpoch(data['timestamp'] * 1000));
   }
 }
