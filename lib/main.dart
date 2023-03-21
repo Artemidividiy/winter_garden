@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+import 'models/ChartData.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -59,7 +61,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late List<_ChartData> _ListChartData = [];
+  late List<ChartData> _ListChartData = [];
   final TooltipBehavior _tooltipBehavior = TooltipBehavior(enable: false);
   final _database = FirebaseDatabase.instance.ref();
 
@@ -80,11 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
               snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else {
-            var dataSource = <_ChartData>[];
+            var dataSource = <ChartData>[];
             var data = snapshot.data!.snapshot.children;
             for (final child in data) {
               var returnable = child.value as Map<String, dynamic>;
-              dataSource.add(_ChartData.fromRTDB(returnable));
+              dataSource.add(ChartData.fromRTDB(returnable));
             }
             return SfCartesianChart(
                 primaryXAxis: CategoryAxis(),
@@ -94,17 +96,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 legend: Legend(isVisible: true),
                 // Enable tooltip
                 tooltipBehavior: _tooltipBehavior,
-                series: <LineSeries<_ChartData, DateTime>>[
-                  LineSeries<_ChartData, DateTime>(
+                series: <LineSeries<ChartData, DateTime>>[
+                  LineSeries<ChartData, DateTime>(
                     dataSource: dataSource,
-                    xValueMapper: (_ChartData data, _) => data.timestamp,
-                    yValueMapper: (_ChartData data, _) => data.temperature,
+                    xValueMapper: (ChartData data, _) => data.timestamp,
+                    yValueMapper: (ChartData data, _) => data.temperature,
                     color: Colors.blue,
                   ),
-                  LineSeries<_ChartData, DateTime>(
+                  LineSeries<ChartData, DateTime>(
                     dataSource: dataSource,
-                    xValueMapper: (_ChartData data, _) => data.timestamp,
-                    yValueMapper: (_ChartData data, _) => data.speed,
+                    xValueMapper: (ChartData data, _) => data.timestamp,
+                    yValueMapper: (ChartData data, _) => data.speed,
                     color: Colors.red,
                   )
                 ]);
@@ -113,29 +115,5 @@ class _MyHomePageState extends State<MyHomePage> {
         stream: _database.child("Log").onValue,
       )),
     ));
-  }
-}
-
-class _ChartData {
-  _ChartData(
-      {required this.humidity,
-      required this.outsideTemp,
-      required this.speed,
-      required this.temperature,
-      required this.timestamp});
-  final int humidity;
-  final double outsideTemp;
-  final double speed;
-  final double temperature;
-  final DateTime timestamp;
-
-  factory _ChartData.fromRTDB(Map<String, dynamic> data) {
-    return _ChartData(
-        humidity: data["humidity"],
-        outsideTemp: data['outsideTemp'],
-        speed: data['speed'] / 10,
-        temperature: data['temperature'],
-        timestamp:
-            DateTime.fromMillisecondsSinceEpoch(data['timestamp'] * 1000));
   }
 }
