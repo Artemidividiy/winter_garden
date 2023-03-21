@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "275161289433",
+    "firebase_url": "https://wintergarden-ff60f-default-rtdb.firebaseio.com",
+    "project_id": "wintergarden-ff60f",
+    "storage_bucket": "wintergarden-ff60f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275161289433:android:84ee31645da617aa78e4c8",
+        "android_client_info": {
+          "package_name": "com.example.winter_garden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275161289433-rstlb6d33bf0nfg8s4jpcr0k78csd6hr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8cyQvSaSi9ZgJqWEyE4Yf0hROb35YxUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275161289433-rstlb6d33bf0nfg8s4jpcr0k78csd6hr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "275161289433-psp0g5cvbee4msj9hn2bucg3acqli35t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.winterGarden"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
