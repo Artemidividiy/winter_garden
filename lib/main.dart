@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+      body: Padding(
       padding: EdgeInsets.all(10),
       child: Center(
           child: StreamBuilder<DatabaseEvent>(
@@ -115,5 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
         stream: _database.child("Log").onValue,
       )),
     ));
+
   }
 }
